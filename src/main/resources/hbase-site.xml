@@ -22,11 +22,13 @@
  */
 -->
 <configuration>
+<!--
 <property>
     <name>hbase.rootdir</name>
-    <value>file:///usr/hdfs/hbase</value>
+    <value>/tmp/hbase</value>
     <description>The directory shared by region servers. </description>
 </property>
+-->
 
 <property>
     <name>hbase.cluster.distributed</name>
@@ -36,9 +38,10 @@
       true: fully-distributed with unmanaged Zookeeper Quorum (see hbase-env.sh)
     </description>
 </property>
+<!--
 <property>
     <name>hbase.tmp.dir</name>
-    <value>c:/usr/hdfs/hbasetmp</value>
+    <value>/tmp/hbase</value>
     <description>Temporary directory on the local filesystem.</description>
   </property>
 
@@ -55,11 +58,13 @@
     <value>0</value>
     <description>zero means unlimited</description>
   </property>
+-->
 
 
 
 
 <!-- zookeeper properties -->
+<!--
 <property>
     <name>hbase.zookeeper.property.clientPort</name>
     <value>2181</value>
@@ -87,5 +92,6 @@
     standalone and pseudo-distributed.
     </description>
   </property>
+-->
 
 </configuration>

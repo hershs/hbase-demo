@@ -17,6 +17,7 @@ import org.apache.hadoop.hbase.ZooKeeperConnectionException;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.util.Bytes;
 
+
 public class CreateTable {
 
   public static void main(String[] args) {
@@ -26,18 +27,20 @@ public class CreateTable {
 
       Configuration conf = HBaseConfiguration.create();
       HBaseAdmin admin = new HBaseAdmin(conf);
-      if (admin.tableExists(Bytes.toBytes(myTableName)))
-        return;
+        if (!admin.tableExists(Bytes.toBytes(myTableName))) {
 
-      // add column families
-      HTableDescriptor tableDesc = new HTableDescriptor(Bytes.toBytes(myTableName));
-      for (int i = 1; i < args.length; i++) {
-        tableDesc.addFamily(new HColumnDescriptor(args[i].getBytes(), DEFAULT_VERSIONS, "GZ", DEFAULT_IN_MEMORY,
-            DEFAULT_BLOCKCACHE, DEFAULT_TTL, DEFAULT_BLOOMFILTER));
-      }
+            // add column families
+            HTableDescriptor tableDesc = new HTableDescriptor(Bytes.toBytes(myTableName));
+            for (int i = 1; i < args.length; i++) {
+                tableDesc.addFamily(new HColumnDescriptor(args[i].getBytes(), DEFAULT_VERSIONS, "GZ", DEFAULT_IN_MEMORY,
+                        DEFAULT_BLOCKCACHE, DEFAULT_TTL, DEFAULT_BLOOMFILTER));
+            }
 
-      // create table
-      admin.createTable(tableDesc);
+            // create table
+            admin.createTable(tableDesc);
+        } else {
+            return;
+        }
 
     } catch (MasterNotRunningException e) {
       e.printStackTrace();
