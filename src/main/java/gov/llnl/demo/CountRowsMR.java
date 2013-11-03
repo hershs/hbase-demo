@@ -27,6 +27,7 @@ import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
 import org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;
 import org.apache.hadoop.hbase.mapreduce.TableMapper;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.output.NullOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -67,6 +68,7 @@ public class CountRowsMR extends Configured implements Tool {
       Job job = new Job(conf, "query: count rows");
       job.setJarByClass(this.getClass());
       job.getConfiguration().set(TABLE_NAME, args[0]);
+      job.setOutputFormatClass(NullOutputFormat.class);
 
       Scan scan = new Scan();
 
